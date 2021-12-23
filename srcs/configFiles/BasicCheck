@@ -1,0 +1,31 @@
+server {
+    listen 0.0.0.0 8080;
+
+    root ${PATH};
+    http_method GET;
+
+    location / {
+        autoindex on;
+    }
+}
+
+server {
+    listen 0.0.0.0 8080;
+    server_name hello.ma;
+    root ${PATH};
+    http_method GET;
+
+    location / {
+        autoindex on;
+    }
+}
+
+server {
+    listen 0.0.0.0 8080;
+    server_name hallo.ma;
+    root ${PATH};
+    http_method GET;
+    location / {
+        autoindex on;
+    }
+}
