@@ -141,7 +141,9 @@ namespace ft
     bool        Request::parseBody(String & buffer)
     {
         if (!BodyFile.is_open())
+        {
             BodyFile.open(file, std::ios::out | std::ios::binary);
+        }
         BodyFile.write(buffer.base(), buffer.length());
         currentBodySize += buffer.length();
         if (currentBodySize >= contentLength)
@@ -155,10 +157,11 @@ namespace ft
 	    std::stringstream	hex;
 	    size_t				newLinePosition;
         std::string         toWrite;
-        size_t              currentPosition;
         StoredChunkedBuffer.write(buffer, buffer.length());
         if (!BodyFile.is_open())
+        {
             BodyFile.open(file, std::ios::out | std::ios::binary);
+        }
 	    while (true)
 	    {
 		    if (currentChunkedLength == std::string::npos|| reachedLength >= currentChunkedLength)
@@ -189,7 +192,6 @@ namespace ft
                 BodyFile.write(toWrite.c_str(), toWrite.length());
                 StoredChunkedBuffer.str(StoredChunkedBuffer.str().substr(toWrite.length()));
                 reachedLength += toWrite.length();
-                currentPosition = StoredChunkedBuffer.tellg();
                 if (StoredChunkedBuffer.str().find("\r\n") == 0) // CHECK WHETHER THE StoredBuffer START WITH CRLF
                     StoredChunkedBuffer.str(StoredChunkedBuffer.str().substr(2));
                 if (!StoredChunkedBuffer.str().length())

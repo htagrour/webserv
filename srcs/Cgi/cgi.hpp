@@ -5,6 +5,8 @@
 #include "../Request/utils/function_utils.hpp"
 #include <fcntl.h>
 #include <stdlib.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 #include <map>
 #define CGIOUTPUT "/tmp/Cgi.txt"
 #define IKHANERR "ikhanERR"
